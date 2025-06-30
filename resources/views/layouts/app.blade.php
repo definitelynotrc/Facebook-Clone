@@ -14,8 +14,17 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-14 flex items-center justify-between">
             <!-- Left -->
             <div class="flex items-center space-x-4">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg"
-                    class="h-8 w-8" alt="FB Logo">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                    class="lucide lucide-waypoints-icon lucide-waypoints">
+                    <circle cx="12" cy="4.5" r="2.5" />
+                    <path d="m10.2 6.3-3.9 3.9" />
+                    <circle cx="4.5" cy="12" r="2.5" />
+                    <path d="M7 12h10" />
+                    <circle cx="19.5" cy="12" r="2.5" />
+                    <path d="m13.8 17.7 3.9-3.9" />
+                    <circle cx="12" cy="19.5" r="2.5" />
+                </svg>
                 <div class="relative">
                     <input type="text" placeholder="Search Fakebook"
                         class="bg-gray-100 pl-8 pr-4 py-1.5 rounded-full text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
