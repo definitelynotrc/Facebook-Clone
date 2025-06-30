@@ -4,28 +4,7 @@ use App\Http\Controllers\PostController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\LikeController;
 use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\Artisan;
 
-Route::get('/run-migrations', function () {
-    try {
-        Artisan::call('migrate', ['--force' => true]);
-        return '✅ Migrations complete!';
-    } catch (\Throwable $e) {
-        return response('<pre>' . $e->getMessage() . "\n\n" . $e->getTraceAsString() . '</pre>', 500);
-    }
-});
-Route::get('/show-log', function () {
-    $logFile = storage_path('logs/laravel.log');
-    if (!file_exists($logFile)) {
-        return 'No log file found.';
-    }
-
-    return response('<pre>' . e(file_get_contents($logFile)) . '</pre>');
-});
-
-Route::get('/ping', function () {
-    return 'pong';
-});
 Route::get('/', function () {
     return auth()->check()
         ? redirect()->route('feed')
