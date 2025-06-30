@@ -142,7 +142,7 @@
                         Your browser does not support the video tag.
                     </video>
                 @else
-                    <img src="{{ asset('storage/' . $post->media_path) }}"
+                    <img src="{{ secure_asset('storage/' . $post->media_path) }}"
                         class="rounded min-w-[300px] max-w-xl h-auto mb-2 mx-auto object-cover">
                 @endif
             @endif
