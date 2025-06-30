@@ -23,7 +23,9 @@ Route::get('/show-log', function () {
     return response('<pre>' . e(file_get_contents($logFile)) . '</pre>');
 });
 
-
+Route::get('/ping', function () {
+    return 'pong';
+});
 Route::get('/', function () {
     return auth()->check()
         ? redirect()->route('feed')

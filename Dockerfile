@@ -1,9 +1,10 @@
 FROM php:8.2-fpm
 
-# System dependencies
+# Install system dependencies
 RUN apt-get update && apt-get install -y \
     build-essential \
     libpng-dev \
+    libjpeg-dev \
     libonig-dev \
     libxml2-dev \
     zip \
@@ -11,19 +12,23 @@ RUN apt-get update && apt-get install -y \
     curl \
     libpq-dev \
     git \
-    && docker-php-ext-install pdo pdo_pgsql mbstring exif pcntl bcmath gd
+    vim \
+    libzip-dev \
+    && docker-php-ext-install pdo pdo_pgsql pgsql zip
 
-# Composer
+# Install Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
-# Set working directory
 WORKDIR /var/www
 
-COPY . .
+# Copy existing application directory contents
+COPY . /var/www
 
-RUN composer install --no-dev --optimize-autoloader
+# Install PHP dependencies
+RUN composer install --optimize-autoloader --no-dev
 
-RUN php artisan config:cache
-RUN php artisan route:cache
+# Laravel permissions
+RUN chown -R www-data:www-data /var/www \
+    && chmod -R 775 /var/www/storage /var/www/bootstrap/cache
 
-CMD ["php", "artisan", "serve", "--host=0.0.0.0", "--port=8080"]
+CMD ["php-fpm"]

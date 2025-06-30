@@ -1,0 +1,23 @@
+services:
+  - type: web
+    name: facebook-clone
+    env: docker
+    plan: free
+    autoDeploy: true
+    envVars:
+      - key: APP_ENV
+        value: production
+      - key: APP_KEY
+        value: base64:cfC38kw/4akDFAzbidQqLmCSIIcVecDkhr1XWnSpEhk=
+      - key: DB_CONNECTION
+        value: pgsql
+      - key: DB_HOST
+        value: dpg-d1guqimmcj7s73d8l8b0-a
+      - key: DB_PORT
+        value: 5432
+      - key: DB_DATABASE
+        value: dpg-d1guqimmcj7s73d8l8b0-a
+      - key: DB_USERNAME
+        value: facebook_clone_dcmk_user
+      - key: DB_PASSWORD
+        value: af98kxT40hrOCuqM3OB3oGoE8gvNhZlk
