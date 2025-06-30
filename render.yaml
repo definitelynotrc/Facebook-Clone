@@ -21,3 +21,9 @@ services:
         value: facebook_clone_dcmk_user
       - key: DB_PASSWORD
         value: af98kxT40hrOCuqM3OB3oGoE8gvNhZlk
+buildCommand: |
+  composer install --optimize-autoloader --no-dev
+  php artisan config:clear
+  php artisan config:cache
+  php artisan route:cache
+  php artisan view:cache
