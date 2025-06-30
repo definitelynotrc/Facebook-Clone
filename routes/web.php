@@ -4,11 +4,16 @@ use App\Http\Controllers\PostController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\LikeController;
 use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\Log;
 
 Route::get('/run-migrations', function () {
-    Artisan::call('migrate', ['--force' => true]);
-    return '✅ Migrations complete!';
+    try {
+        \Artisan::call('migrate', ['--force' => true]);
+        return 'Migrations complete!';
+    } catch (\Exception $e) {
+        Log::error('Migration error: ' . $e->getMessage());
+        return response('Migration failed. Check logs.', 500);
+    }
 });
 Route::get('/', function () {
     return auth()->check()
