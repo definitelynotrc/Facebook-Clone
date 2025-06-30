@@ -1,22 +1,36 @@
-FROM php:8.2-apache
+FROM php:8.2-fpm
 
+# Install dependencies
 RUN apt-get update && apt-get install -y \
-    git zip unzip libonig-dev libxml2-dev libzip-dev curl \
-    && docker-php-ext-install pdo_mysql zip
+    build-essential \
+    libpng-dev \
+    libjpeg62-turbo-dev \
+    libfreetype6-dev \
+    libzip-dev \
+    zip \
+    unzip \
+    curl \
+    libpq-dev \
+    git \
+    && docker-php-ext-install pdo pdo_pgsql pgsql zip
 
-RUN a2enmod rewrite
-
+# Install Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
+# Set working directory
 WORKDIR /var/www/html
 
-COPY . /var/www/html
+# Copy project files
+COPY . .
 
-RUN chown -R www-data:www-data /var/www/html \
-    && chmod -R 755 /var/www/html
+# Install PHP dependencies
+RUN composer install --no-interaction --prefer-dist --optimize-autoloader
 
-COPY .docker/vhost.conf /etc/apache2/sites-available/000-default.conf
+# Set permissions
+RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache
 
-EXPOSE 80
+# Expose port
+EXPOSE 8000
 
-CMD ["apache2-foreground"]
+# Start Laravel
+CMD php artisan migrate --force && php artisan serve --host=0.0.0.0 --port=8000
