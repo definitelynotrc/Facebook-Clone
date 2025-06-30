@@ -4,7 +4,12 @@ use App\Http\Controllers\PostController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\LikeController;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Artisan;
 
+Route::get('/run-migrations', function () {
+    Artisan::call('migrate', ['--force' => true]);
+    return '✅ Migrations complete!';
+});
 Route::get('/', function () {
     return auth()->check()
         ? redirect()->route('feed')
