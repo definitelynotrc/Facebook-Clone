@@ -14,6 +14,15 @@ Route::get('/run-migrations', function () {
         return response('<pre>' . $e->getMessage() . "\n\n" . $e->getTraceAsString() . '</pre>', 500);
     }
 });
+Route::get('/show-log', function () {
+    $logFile = storage_path('logs/laravel.log');
+    if (!file_exists($logFile)) {
+        return 'No log file found.';
+    }
+
+    return response('<pre>' . e(file_get_contents($logFile)) . '</pre>');
+});
+
 
 Route::get('/', function () {
     return auth()->check()
