@@ -21,14 +21,18 @@ COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
 WORKDIR /var/www
 
-# Copy existing application directory contents
+# Copy application files
 COPY . /var/www
 
-# Install PHP dependencies
+# Install dependencies
 RUN composer install --optimize-autoloader --no-dev
 
-# Laravel permissions
+# Set permissions
 RUN chown -R www-data:www-data /var/www \
     && chmod -R 775 /var/www/storage /var/www/bootstrap/cache
 
-CMD ["php-fpm"]
+# Expose the port Laravel will serve on
+EXPOSE 8080
+
+# Serve Laravel using PHP's built-in server
+CMD ["php", "-S", "0.0.0.0:8080", "-t", "public"]
