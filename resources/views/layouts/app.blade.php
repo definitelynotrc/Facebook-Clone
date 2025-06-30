@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Facebook Clone</title>
+    <title>Fakebook</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
 
@@ -17,7 +17,7 @@
                 <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg"
                     class="h-8 w-8" alt="FB Logo">
                 <div class="relative">
-                    <input type="text" placeholder="Search Facebook"
+                    <input type="text" placeholder="Search Fakebook"
                         class="bg-gray-100 pl-8 pr-4 py-1.5 rounded-full text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
                     <svg class="absolute left-2 top-2.5 h-4 w-4 text-gray-500" fill="none" stroke="currentColor"
                         stroke-width="2" viewBox="0 0 24 24">
