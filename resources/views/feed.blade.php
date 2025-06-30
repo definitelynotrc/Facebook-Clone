@@ -94,39 +94,41 @@
                     </div>
                 </div>
 
+                @if(auth()->id() === $post->user_id)
+                    <div x-data="{ open: false }" class="relative">
+                        <!-- Dropdown button -->
+                        <button @click="open = !open" class="focus:outline-none">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-gray-600 hover:text-black" fill="none"
+                                viewBox="0 0 24 24" stroke="currentColor">
+                                <circle cx="12" cy="12" r="1" />
+                                <circle cx="19" cy="12" r="1" />
+                                <circle cx="5" cy="12" r="1" />
+                            </svg>
+                        </button>
 
-                <div x-data="{ open: false }" class="relative">
-                    <!-- Dropdown button -->
-                    <button @click="open = !open" class="focus:outline-none">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-gray-600 hover:text-black" fill="none"
-                            viewBox="0 0 24 24" stroke="currentColor">
-                            <circle cx="12" cy="12" r="1" />
-                            <circle cx="19" cy="12" r="1" />
-                            <circle cx="5" cy="12" r="1" />
-                        </svg>
-                    </button>
+                        <!-- Dropdown for edit and delete -->
+                        <div x-show="open" @click.outside="open = false" x-transition
+                            class="absolute right-0 mt-2 w-32 bg-white border rounded shadow-md z-10">
+                            <!-- Edit -->
+                            <a href="{{ route('posts.edit', $post->id) }}"
+                                class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">✏️
+                                Edit</a>
 
-                    <!-- Dropdown for edit and delete -->
-                    <div x-show="open" @click.outside="open = false" x-transition
-                        class="absolute right-0 mt-2 w-32 bg-white border rounded shadow-md z-10">
-                        <!-- Edit -->
-                        <a href="{{ route('posts.edit', $post->id) }}"
-                            class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">✏️
-                            Edit</a>
+                            <!-- Delete -->
+                            <form id="delete-post-{{ $post->id }}" action="{{ route('posts.destroy', $post->id) }}" method="POST"
+                                class="delete-form">
+                                @csrf
+                                @method('DELETE')
+                                <button type="button" onclick="confirmDelete({{ $post->id }})"
+                                    class="w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-gray-100">
+                                    🗑️ Delete
+                                </button>
+                            </form>
 
-                        <!-- Delete -->
-                        <form id="delete-post-{{ $post->id }}" action="{{ route('posts.destroy', $post->id) }}" method="POST"
-                            class="delete-form">
-                            @csrf
-                            @method('DELETE')
-                            <button type="button" onclick="confirmDelete({{ $post->id }})"
-                                class="w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-gray-100">
-                                🗑️ Delete
-                            </button>
-                        </form>
-
+                        </div>
                     </div>
-                </div>
+                @endif
+
             </div>
 
             <p class="mb-2">{{ $post->content }}</p>
