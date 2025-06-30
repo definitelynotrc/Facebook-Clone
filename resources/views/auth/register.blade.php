@@ -1,7 +1,7 @@
 <x-guest-layout>
     <div class="min-h-screen w-full flex items-center justify-center px-4">
         <div class="bg-white shadow-lg rounded-lg w-full max-w-md p-6">
-            <h1 class="text-blue-600 text-4xl font-bold text-center mb-2">facebook</h1>
+            <h1 class="text-blue-600 text-4xl font-bold text-center mb-2">fakebook</h1>
             <p class="text-center text-lg font-semibold">Create a new account</p>
             <p class="text-center text-sm text-gray-600 mb-4">It's quick and easy.</p>
 

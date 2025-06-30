@@ -3,7 +3,7 @@
         <h1 class="text-center text-blue-600 text-5xl font-extrabold mb-6">facebook</h1>
         <div class="bg-white shadow-md rounded p-8 w-full max-w-md">
 
-            <p class="text-center text-gray-700 mb-4 text-lg">Log in to Facebook</p>
+            <p class="text-center text-gray-700 mb-4 text-lg">Log in to Fakebook</p>
 
             <form method="POST" action="{{ route('login') }}">
                 @csrf
