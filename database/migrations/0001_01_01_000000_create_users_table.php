@@ -21,6 +21,7 @@ return new class extends Migration {
             $table->string('birth_day')->nullable();
             $table->string('birth_year')->nullable();
             $table->string('email')->unique();
+
             $table->string('password');
 
             $table->rememberToken();
