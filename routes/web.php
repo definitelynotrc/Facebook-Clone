@@ -4,17 +4,17 @@ use App\Http\Controllers\PostController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\LikeController;
 use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Artisan;
 
 Route::get('/run-migrations', function () {
     try {
-        \Artisan::call('migrate', ['--force' => true]);
-        return 'Migrations complete!';
-    } catch (\Exception $e) {
-        Log::error('Migration error: ' . $e->getMessage());
-        return response('Migration failed. Check logs.', 500);
+        Artisan::call('migrate', ['--force' => true]);
+        return '✅ Migrations complete!';
+    } catch (\Throwable $e) {
+        return response('<pre>' . $e->getMessage() . "\n\n" . $e->getTraceAsString() . '</pre>', 500);
     }
 });
+
 Route::get('/', function () {
     return auth()->check()
         ? redirect()->route('feed')
